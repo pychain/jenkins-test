@@ -21,7 +21,7 @@ pipeline {
 
          stage('apply') {
              when {
-                 branch 'first'
+                 branch 'main'
              }
              steps {
                  sh 'terraform init' 
