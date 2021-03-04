@@ -12,17 +12,12 @@ pipeline {
       args '--entrypoint='
     }
   }
-    stages {
-        stage('checkout') {
-            steps {
-                 script{
-                        dir("terraform")
-                        {
-                            git "https://github.com/pychain/jenkins-test.git"
-                        }
-                    }
-                }
-            }
+  stages {
+    stage('Terraform Plan') { 
+      steps {
+        sh 'terraform plan -no-color -out=create.tfplan' 
+      }
+    }
 
         stage('Plan') {
             steps {
