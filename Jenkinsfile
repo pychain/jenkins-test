@@ -15,7 +15,7 @@ pipeline {
          stage('init') {
            steps {
                  sh 'terraform init' 
-                 sh 'terraform plan -out=create.tfplan' 
+                 sh 'terraform plan -out=tfplan' 
              }
          }             
 
@@ -31,5 +31,5 @@ pipeline {
          }
 
      }
-     }
+ }
 
