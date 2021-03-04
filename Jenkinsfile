@@ -1,4 +1,3 @@
-
 pipeline {
      agent none
      
@@ -8,37 +7,37 @@ pipeline {
     }
   
 
-stages {
-    stage('init') {
-     agent {
-       docker {
-           image 'hashicorp/terraform:light'
-           args '--entrypoint='
-       }
-     }
-      steps {
-            sh 'terraform init' 
-            sh 'terraform plan -no-color -out=create.tfplan' 
-        }
-    }             
-           
-    stage('apply') {
-        when {
-            branch 'first'
-        }
+     stages {
+         stage('init') {
           agent {
             docker {
                 image 'hashicorp/terraform:light'
                 args '--entrypoint='
             }
           }
-        steps {
-            sh 'terraform init' 
-            sh 'terraform plan -no-color -out=tfplan' 
-            sh 'terraform apply -input=false tfplan'
-        }  
-    }
-  
-}
-}
+           steps {
+                 sh 'terraform init' 
+                 sh 'terraform plan -no-color -out=create.tfplan' 
+             }
+         }             
+
+         stage('apply') {
+             when {
+                 branch 'first'
+             }
+               agent {
+                 docker {
+                     image 'hashicorp/terraform:light'
+                     args '--entrypoint='
+                 }
+               }
+             steps {
+                 sh 'terraform init' 
+                 sh 'terraform plan -no-color -out=tfplan' 
+                 sh 'terraform apply -input=false tfplan'
+             }  
+         }
+
+     }
+     }
 
