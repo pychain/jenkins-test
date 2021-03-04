@@ -13,17 +13,14 @@ agent {
   }
 }
 stages {
-    stage('infrastructure_developement') {
-
-
-
-        steps {
+    stage('init') {
+      steps {
             sh 'terraform init' 
             sh 'terraform plan -no-color -out=create.tfplan' 
         }
-                 
+    }             
            
-    stage('infrastructure_production') {
+    stage('apply') {
 
         steps {
             sh 'terraform init' 
@@ -31,7 +28,7 @@ stages {
             sh 'terraform apply -input=false tfplan'
         }  
     }
-  }
+  
 }
 }
 
