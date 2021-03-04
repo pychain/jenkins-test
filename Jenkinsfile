@@ -6,17 +6,17 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
     }
   
-
+agent {
+  docker {
+      image 'hashicorp/terraform:light'
+      args '--entrypoint='
+  }
+}
 stages {
     stage('infrastructure_developement') {
 
 
-        agent {
-            docker {
-                image 'hashicorp/terraform:light'
-                args '--entrypoint='
-            }
-        }
+
         steps {
             sh 'terraform init' 
             sh 'terraform plan -no-color -out=create.tfplan' 
@@ -25,14 +25,6 @@ stages {
            
     stage('infrastructure_production') {
 
-
-
-        agent {
-            docker {
-                image 'hashicorp/terraform:light'
-                args '--entrypoint='
-            }
-        }
         steps {
             sh 'terraform init' 
             sh 'terraform plan -no-color -out=tfplan' 
