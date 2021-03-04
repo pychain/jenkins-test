@@ -15,7 +15,7 @@ pipeline {
          stage('init') {
            steps {
                  sh 'terraform init' 
-                 sh 'terraform plan -no-color -out=create.tfplan' 
+                 sh 'terraform plan -out=create.tfplan' 
              }
          }             
 
@@ -23,9 +23,9 @@ pipeline {
              when {
                  branch 'main'
              }
-             steps {
-                 sh 'terraform init' 
-                 sh 'terraform plan -no-color -out=tfplan' 
+             steps { 
+                 sh 'terraform plan -out=tfplan'
+                 sh 'sleep 20'
                  sh 'terraform apply -input=false tfplan'
              }  
          }
