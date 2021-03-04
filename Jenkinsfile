@@ -29,7 +29,7 @@ pipeline {
       stage('infrastructure_production') {
 
           when {
-              branch 'master'
+              branch 'main'
           }
 
           agent {
