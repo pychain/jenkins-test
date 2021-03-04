@@ -6,10 +6,12 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
     }
 
-   agent  any
-        options {
-                timestamps ()
-            }
+  agent {
+    docker {
+      image 'hashicorp/terraform:light'
+      args '--entrypoint='
+    }
+  }
     stages {
         stage('checkout') {
             steps {
