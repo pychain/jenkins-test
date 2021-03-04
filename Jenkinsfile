@@ -21,7 +21,9 @@ stages {
     }             
            
     stage('apply') {
-
+        when {
+            branch 'first'
+        }
         steps {
             sh 'terraform init' 
             sh 'terraform plan -no-color -out=tfplan' 
