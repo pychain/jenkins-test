@@ -10,7 +10,7 @@ pipeline {
      stages {
          stage('init') {
            steps {
-                 sh 'hello world'
+                 sh 'echo hello world'
              }
          }             
 
@@ -19,7 +19,7 @@ pipeline {
                  branch 'main'
              }
              steps { 
-                 sh 'hello main'
+                 sh 'echo hello main'
              }  
          }
 
